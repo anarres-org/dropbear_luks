@@ -1,0 +1,6 @@
+*.retry
+custom
+.molecule
+.cache
+*.pyc
+*.log

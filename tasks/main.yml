@@ -1,0 +1,92 @@
+---
+
+- name: Install required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - busybox
+    - dropbear
+  notify:
+    - Update initramfs
+
+- name: Enable busybox
+  lineinfile:
+    path: /etc/initramfs-tools/initramfs.conf
+    state: present
+    regexp: '^BUSYBOX=*'
+    line: BUSYBOX=y
+  notify:
+    - Update initramfs
+
+- name: Enable drobpear
+  lineinfile:
+    path: /etc/initramfs-tools/initramfs.conf
+    state: present
+    insertafter: '^BUSYBOX=*'
+    regexp: '^DROPBEAR=*'
+    line: DROPBEAR=y
+  notify:
+    - Update initramfs
+
+- name: Setup static ip
+  lineinfile:
+    path: /etc/initramfs-tools/initramfs.conf
+    state: present
+    insertafter: '^DEVICE=*'
+    regexp: '^IP=*'
+    line: "IP={{ static_ip }}:{{ remote_ip }}:{{ gateway }}:{{ netmask }}:{{ hostname }}:{{ network_interface }}"
+  notify:
+    - Update initramfs
+  when:
+    - static_ip is defined
+
+- name: Convert dropbear SSH key
+  shell: |
+    /usr/lib/dropbear/dropbearconvert dropbear openssh dropbear_rsa_host_key id_rsa
+    dropbearkey -y -f dropbear_rsa_host_key | grep "^ssh-rsa " > id_rsa.pub
+  args:
+    chdir: /etc/dropbear-initramfs
+    creates: id_rsa.pub
+  notify:
+    - Update initramfs
+
+- name: Copy SSH public key to the remote server
+  authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', ssh_pub_key) }}"
+    path: /etc/dropbear-initramfs/authorized_keys
+  notify:
+    - Update initramfs
+
+- name: Enable dropbear start
+  lineinfile:
+    path: /etc/default/dropbear
+    state: present
+    regexp: '^NO_START=*'
+    line: NO_START=0
+  notify:
+    - Update initramfs
+
+- name: Copy crypt unlock script
+  copy:
+    src: crypt_unlock.sh
+    dest: /etc/initramfs-tools/hooks/crypt_unlock.sh
+    mode: 0700
+  notify:
+    - Update initramfs
+
+- name: Disable dropbear service
+  service:
+    name: dropbear
+    enabled: false
+
+- name: Disable GRUB splash
+  lineinfile:
+    path: /etc/default/grub
+    state: present
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT=*'
+    line: GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+  notify:
+    - Update GRUB

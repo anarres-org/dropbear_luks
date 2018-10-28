@@ -1,0 +1,7 @@
+---
+
+- name: Update initramfs
+  command: update-initramfs -u
+
+- name: Update GRUB
+  command: update-grub

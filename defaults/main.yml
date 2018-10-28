@@ -1,0 +1,6 @@
+---
+
+ssh_pub_key: ~/.ssh/id_rsa.pub  # Local path to your public SSH key
+
+remote_ip:
+network_interface: "{{ ansible_default_ipv4.interface }}"

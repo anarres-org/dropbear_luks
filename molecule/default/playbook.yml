@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    static_ip: 172.16.100.12
+    gateway: 172.16.100.1
+    netmask: 255.255.255.0
+    hostname: test
+  roles:
+    - role: dropbear_luks
