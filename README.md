@@ -16,6 +16,11 @@ and
 Uses the *crypt_unlock.sh* from
 [gusennan](https://gist.github.com/gusennan/712d6e81f5cf9489bd9f)
 
+## Compatibility
+
+This role should work in any distro from the **Debian** family. It is tested
+on debian stretch.
+
 ## Requirements
 
 You'll need an already configured **Debian** family server with an unencrypted
