@@ -30,7 +30,9 @@ by physically entering the LUKS password to the server.
 ## Role Variables
 
 * `ssh_pub_key`: Local path to your public SSH key
-* `static_ip`: Static IP for the **initramfs**.
+* `static_ip`: Static IP for the **initramfs**. If you leave it undefined,
+DHCP will be used. But if it's defined, the following variables must be
+defined too.
 * `remote_ip`: Allowed remote IP address to recieve connections from. Empty by
 default (incoming connections aren't restricted to an specific IP address).
 * `gateway`: Gateway IP address.

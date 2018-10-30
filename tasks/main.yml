@@ -39,7 +39,7 @@
   notify:
     - Update initramfs
   when:
-    - static_ip is defined
+    - static_ip is defined and (static_ip | length>0)
 
 - name: Convert dropbear SSH key
   shell: |
