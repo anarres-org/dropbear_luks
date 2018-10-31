@@ -10,7 +10,7 @@
   notify:
     - Update initramfs
 
-- name: Enable busybox
+- name: Enable busybox in initramfs
   lineinfile:
     path: /etc/initramfs-tools/initramfs.conf
     state: present
@@ -19,7 +19,7 @@
   notify:
     - Update initramfs
 
-- name: Enable drobpear
+- name: Enable drobpear in initramfs
   lineinfile:
     path: /etc/initramfs-tools/initramfs.conf
     state: present
@@ -29,7 +29,7 @@
   notify:
     - Update initramfs
 
-- name: Setup static ip
+- name: Setup static ip in initramfs
   lineinfile:
     path: /etc/initramfs-tools/initramfs.conf
     state: present
