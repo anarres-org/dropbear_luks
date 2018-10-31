@@ -13,7 +13,6 @@ def test_initramfs_file(host):
     assert initramfs_file.user == 'root'
     assert initramfs_file.group == 'root'
     assert initramfs_file.contains('^BUSYBOX=y$')
-    assert initramfs_file.contains('^DROPBEAR=y$')
     assert initramfs_file.contains(
             '^IP=172.16.100.12::172.16.100.1:255.255.255.0:test:eth0$')
 

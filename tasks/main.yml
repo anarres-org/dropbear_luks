@@ -19,16 +19,6 @@
   notify:
     - Update initramfs
 
-- name: Enable drobpear in initramfs
-  lineinfile:
-    path: /etc/initramfs-tools/initramfs.conf
-    state: present
-    insertafter: '^BUSYBOX=*'
-    regexp: '^DROPBEAR=*'
-    line: DROPBEAR=y
-  notify:
-    - Update initramfs
-
 - name: Setup static ip in initramfs
   lineinfile:
     path: /etc/initramfs-tools/initramfs.conf
