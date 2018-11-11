@@ -59,6 +59,17 @@
   notify:
     - Update initramfs
 
+- name: Configure dropbear SSH port
+  lineinfile:
+    path: /etc/default/dropbear
+    state: present
+    regexp: '^.?DROPBEAR_PORT=*'
+    line: "DROPBEAR_PORT={{ ssh_port }}"
+  notify:
+    - Update initramfs
+  when:
+    - ssh_port is defined
+
 - name: Copy crypt unlock script
   copy:
     src: crypt_unlock.sh

@@ -51,7 +51,8 @@ def test_dropbear_defaults_file(host):
     assert dropbear_defaults_file.exists
     assert dropbear_defaults_file.user == 'root'
     assert dropbear_defaults_file.group == 'root'
-    assert dropbear_defaults_file.contains('^NO_START=0*')
+    assert dropbear_defaults_file.contains('^NO_START=0$')
+    assert dropbear_defaults_file.contains('^DROPBEAR_PORT=22$')
 
 
 def test_crypt_unlock_file(host):

@@ -39,6 +39,7 @@ default (incoming connections aren't restricted to an specific IP address).
 * `netmask`: Netmask.
 * `hostname`: Hostname.
 * `network_interface`: Main network interface to setup the static IP on.
+* `ssh_port`: If defined, the **dropbear** SSH port will be set to its value.
 
 ## Dependencies
 
