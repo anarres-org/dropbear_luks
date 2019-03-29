@@ -11,7 +11,7 @@ Based on
 and
 [eugenemdavis](https://www.eugenemdavis.com/set-static-ip-initramfs.html).
 
-**Note**: It only supports RSA SSH keys for the moment.
+**Note**: It only supports RSA SSH keys for now.
 
 Uses the *crypt_unlock.sh* from
 [gusennan](https://gist.github.com/gusennan/712d6e81f5cf9489bd9f)
@@ -69,4 +69,4 @@ GPLv3
 
 ## Author Information
 
-m0wer [ at ] autistici.org
+m0wer (at) autistici.org
