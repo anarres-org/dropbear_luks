@@ -31,6 +31,17 @@
   when:
     - static_ip is defined and (static_ip | length>0)
 
+- name: Configure dropbear SSH port
+  lineinfile:
+    path: /etc/initramfs-tools/initramfs.conf
+    state: present
+    regexp: '^.?DROPBEAR_OPTIONS=*'
+    line: "DROPBEAR_OPTIONS='-p {{ ssh_port }}'"
+  notify:
+    - Update initramfs
+  when:
+    - ssh_port is defined
+
 - name: Convert dropbear SSH key
   shell: |
     /usr/lib/dropbear/dropbearconvert dropbear openssh dropbear_rsa_host_key id_rsa
@@ -58,17 +69,6 @@
     line: NO_START=0
   notify:
     - Update initramfs
-
-- name: Configure dropbear SSH port
-  lineinfile:
-    path: /etc/default/dropbear
-    state: present
-    regexp: '^.?DROPBEAR_PORT=*'
-    line: "DROPBEAR_PORT={{ ssh_port }}"
-  notify:
-    - Update initramfs
-  when:
-    - ssh_port is defined
 
 - name: Copy crypt unlock script
   copy:

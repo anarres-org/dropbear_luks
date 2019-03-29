@@ -15,6 +15,7 @@ def test_initramfs_file(host):
     assert initramfs_file.contains('^BUSYBOX=y$')
     assert initramfs_file.contains(
             '^IP=172.16.100.12::172.16.100.1:255.255.255.0:test:eth0$')
+    assert initramfs_file.contains("^DROPBEAR_OPTIONS='-p 22'$")
 
 
 def test_rsa_key_file(host):
@@ -52,7 +53,6 @@ def test_dropbear_defaults_file(host):
     assert dropbear_defaults_file.user == 'root'
     assert dropbear_defaults_file.group == 'root'
     assert dropbear_defaults_file.contains('^NO_START=0$')
-    assert dropbear_defaults_file.contains('^DROPBEAR_PORT=22$')
 
 
 def test_crypt_unlock_file(host):
