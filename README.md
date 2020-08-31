@@ -57,7 +57,8 @@ None.
 ## Testing
 
 To test the role you need [molecule](http://molecule.readthedocs.io/en/latest/)
-.
+. You also need to have a valid SSH public key in *~/.ssh/id_rsa.pub*. If you
+don't have one, you can create it with: `ssh-keygen -C test -f ~/.ssh/id_rsa`.
 
 ```bash
 molecule test
@@ -69,4 +70,4 @@ GPLv3
 
 ## Author Information
 
- m0wer: m0wer (at) autistici (dot) org
+ * m0wer: m0wer (at) autistici (dot) org
