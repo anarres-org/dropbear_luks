@@ -19,7 +19,7 @@ Uses the *crypt_unlock.sh* from
 ## Compatibility
 
 This role should work in any distro from the **Debian** family. It is tested
-on debian stretch.
+on debian buster.
 
 ## Requirements
 
@@ -69,4 +69,4 @@ GPLv3
 
 ## Author Information
 
-m0wer (at) autistici.org
+ m0wer: m0wer (at) autistici (dot) org
