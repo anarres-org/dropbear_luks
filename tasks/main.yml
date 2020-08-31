@@ -48,6 +48,7 @@
     /usr/lib/dropbear/dropbearconvert dropbear openssh dropbear_rsa_host_key id_rsa
     dropbearkey -y -f dropbear_rsa_host_key | grep "^ssh-rsa " > id_rsa.pub
   args:
+    executable: /bin/bash
     chdir: /etc/dropbear-initramfs
     creates: id_rsa.pub
   notify:
