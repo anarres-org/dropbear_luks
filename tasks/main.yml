@@ -44,6 +44,7 @@
 
 - name: Convert dropbear SSH key
   shell: |
+    set -o pipefail
     /usr/lib/dropbear/dropbearconvert dropbear openssh dropbear_rsa_host_key id_rsa
     dropbearkey -y -f dropbear_rsa_host_key | grep "^ssh-rsa " > id_rsa.pub
   args:
